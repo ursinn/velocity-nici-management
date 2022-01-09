@@ -759,8 +759,7 @@ public class Message {
             registeredServer = serverConnection.get().getServer();
         }
 
-        String sendMessage = serverConnection.map(connection -> "[" + Utils.getServerName(connection.getServerInfo().getName()) + "] <" + player.getUsername() + "> " + message)
-                .orElseGet(() -> "[UNKNOWN] <" + player.getUsername() + "> " + message);
+        String sendMessage = "[" + Utils.getServerName(serverConnection) + "] <" + player.getUsername() + "> " + message;
 
         TextComponent textComponent = Component.text(sendMessage);
         // send message to other server

@@ -26,6 +26,7 @@ package dev.ursinn.velocity.nici.management.modules;
 
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.connection.DisconnectEvent;
+import com.velocitypowered.api.event.player.ServerPostConnectEvent;
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ProxyServer;
 import com.velocitypowered.api.proxy.ServerConnection;
@@ -77,6 +78,14 @@ public class TabList {
                         .build()));
             }
         }
+    }
+
+    @Subscribe
+    public void onChange(ServerPostConnectEvent event) {
+        Player player = event.getPlayer();
+        Component header = Component.text("discord.gg/catland");
+        Component footer = Component.text("Your on " + Utils.getServerName(player.getCurrentServer()) + " Map");
+        player.sendPlayerListHeaderAndFooter(header, footer);
     }
 
 }

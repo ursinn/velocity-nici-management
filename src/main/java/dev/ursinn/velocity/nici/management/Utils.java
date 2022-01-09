@@ -24,12 +24,22 @@
 
 package dev.ursinn.velocity.nici.management;
 
+import com.velocitypowered.api.proxy.ServerConnection;
+
+import java.util.Optional;
+
 public class Utils {
 
     private Utils() {}
 
     public static String getServerName(String serverName) {
         return Character.toUpperCase(serverName.charAt(0)) + serverName.substring(1).replace("_", ".");
+    }
+
+    public static String getServerName(Optional<ServerConnection> serverConnection) {
+        return serverConnection
+                .map(connection -> getServerName(connection.getServerInfo().getName()))
+                .orElse("UNKNOWN");
     }
 
 }
