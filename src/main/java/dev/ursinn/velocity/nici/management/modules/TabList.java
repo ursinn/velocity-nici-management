@@ -71,7 +71,14 @@ public class TabList {
 
                 Optional<ServerConnection> serverConnection = others.getCurrentServer();
                 serverConnection.ifPresent(connection -> player.getTabList().addEntry(TabListEntry.builder()
-                        .displayName(Component.text("[" + Utils.getServerName(connection.getServerInfo().getName()) + "] " + others.getUsername()))
+                        .displayName(Component.text()
+                                .content("[")
+                                .append(Utils.getServerName(connection.getServerInfo().getName()))
+                                .append(Component.text("]"))
+                                .append(Component.space())
+                                .append(Component.text(others.getUsername()))
+                                .build()
+                        )
                         .latency((int) others.getPing())
                         .profile(others.getGameProfile())
                         .gameMode(3)
