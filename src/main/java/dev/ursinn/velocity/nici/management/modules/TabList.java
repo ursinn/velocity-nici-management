@@ -93,7 +93,7 @@ public class TabList {
                 .build();
         Component footer = Component.text()
                 .content("You are on the ").color(NamedTextColor.AQUA)
-                .append(Component.text(Utils.getServerName(player.getCurrentServer())).color(NamedTextColor.YELLOW))
+                .append(Utils.getServerName(player.getCurrentServer()).color(NamedTextColor.YELLOW))
                 .append(Component.text(" Map").color(NamedTextColor.AQUA)).build();
         player.sendPlayerListHeaderAndFooter(header, footer);
     }

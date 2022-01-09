@@ -24,22 +24,66 @@
 
 package dev.ursinn.velocity.nici.management;
 
+import com.velocitypowered.api.proxy.Player;
+import com.velocitypowered.api.proxy.ProxyServer;
 import com.velocitypowered.api.proxy.ServerConnection;
+import com.velocitypowered.api.proxy.server.RegisteredServer;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class Utils {
 
     private Utils() {}
 
-    public static String getServerName(String serverName) {
-        return Character.toUpperCase(serverName.charAt(0)) + serverName.substring(1).replace("_", ".");
+    public static @NotNull Component getServerName(String serverName) {
+        return Component.text(Character.toUpperCase(serverName.charAt(0)) + serverName.substring(1).replace("_", "."));
     }
 
-    public static String getServerName(Optional<ServerConnection> serverConnection) {
+    public static @NotNull Component getServerName(Optional<ServerConnection> serverConnection) {
         return serverConnection
                 .map(connection -> getServerName(connection.getServerInfo().getName()))
-                .orElse("UNKNOWN");
+                .orElse(Component.text("UNKNOWN"));
+    }
+
+    public static @NotNull Component getPrefix(Player player) {
+        if (player.hasPermission("nici.management.admin")) {
+            return Component.text()
+                    .content("[Admin] ").color(NamedTextColor.RED)
+                    .append(Component.text(player.getUsername()).color(NamedTextColor.GOLD))
+                    .build();
+        }
+
+        return Component.text(player.getUsername()).color(NamedTextColor.GREEN);
+    }
+
+    public static void broadcast(ProxyServer proxyServer, Player player, Component message) {
+        Optional<ServerConnection> serverConnection = player.getCurrentServer();
+        RegisteredServer registeredServer = null;
+        if (serverConnection.isPresent()) {
+            registeredServer = serverConnection.get().getServer();
+        }
+
+        Component component = Component.text()
+                .content("")
+                .append(Component.text("[").color(NamedTextColor.GRAY))
+                .append(Utils.getServerName(serverConnection).color(NamedTextColor.YELLOW))
+                .append(Component.text("] ").color(NamedTextColor.GRAY))
+                .append(Utils.getPrefix(player))
+                .append(Component.text(":"))
+                .append(Component.space())
+                .append(message)
+                .build();
+
+        // send message to other server
+        for (RegisteredServer server : proxyServer.getAllServers()) {
+            if (!Objects.equals(server, registeredServer)) {
+                server.sendMessage(component);
+            }
+        }
     }
 
 }

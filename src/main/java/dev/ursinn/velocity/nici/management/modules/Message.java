@@ -34,6 +34,7 @@ import com.velocitypowered.api.proxy.server.RegisteredServer;
 import dev.ursinn.velocity.nici.management.Utils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -743,31 +744,14 @@ public class Message {
         Player player = event.getPlayer();
         String message = event.getMessage();
 
+        // Word Filter
         for (String word : wordList) {
             if (message.toLowerCase().contains(word.toLowerCase())) {
                 message = message.replaceAll("(?i)" + word, "*".repeat(word.length()));
             }
         }
 
-        broadcast(player, message);
-    }
-
-    private void broadcast(Player player, String message) {
-        Optional<ServerConnection> serverConnection = player.getCurrentServer();
-        RegisteredServer registeredServer = null;
-        if (serverConnection.isPresent()) {
-            registeredServer = serverConnection.get().getServer();
-        }
-
-        String sendMessage = "[" + Utils.getServerName(serverConnection) + "] <" + player.getUsername() + "> " + message;
-
-        TextComponent textComponent = Component.text(sendMessage);
-        // send message to other server
-        for (RegisteredServer server : this.proxyServer.getAllServers()) {
-            if (!Objects.equals(server, registeredServer)) {
-                server.sendMessage(textComponent);
-            }
-        }
+        Utils.broadcast(this.proxyServer, player, Component.text(message));
     }
 
 }
