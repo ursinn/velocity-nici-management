@@ -34,6 +34,7 @@ import com.velocitypowered.api.proxy.player.TabListEntry;
 import dev.ursinn.velocity.nici.management.ManagementPlugin;
 import dev.ursinn.velocity.nici.management.Utils;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.slf4j.Logger;
 
 import java.util.Optional;
@@ -83,8 +84,17 @@ public class TabList {
     @Subscribe
     public void onChange(ServerPostConnectEvent event) {
         Player player = event.getPlayer();
-        Component header = Component.text("discord.gg/catland");
-        Component footer = Component.text("Your on " + Utils.getServerName(player.getCurrentServer()) + " Map");
+        player.getTabList().clearHeaderAndFooter();
+        Component header = Component.text()
+                .content(" You are playing on ").color(NamedTextColor.AQUA)
+                .append(Component.text("MC.NIKELS.CH ").color(NamedTextColor.YELLOW))
+                .append(Component.newline())
+                .append(Component.text("discord.gg/catland").color(NamedTextColor.GOLD))
+                .build();
+        Component footer = Component.text()
+                .content("You are on the ").color(NamedTextColor.AQUA)
+                .append(Component.text(Utils.getServerName(player.getCurrentServer())).color(NamedTextColor.YELLOW))
+                .append(Component.text(" Map").color(NamedTextColor.AQUA)).build();
         player.sendPlayerListHeaderAndFooter(header, footer);
     }
 
