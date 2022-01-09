@@ -7,6 +7,7 @@ import com.velocitypowered.api.proxy.ProxyServer;
 import com.velocitypowered.api.proxy.ServerConnection;
 import com.velocitypowered.api.proxy.player.TabListEntry;
 import dev.ursinn.velocity.nici.management.ManagementPlugin;
+import dev.ursinn.velocity.nici.management.Utils;
 import net.kyori.adventure.text.Component;
 import org.slf4j.Logger;
 
@@ -43,16 +44,13 @@ public class TabList {
                 }
 
                 Optional<ServerConnection> serverConnection = others.getCurrentServer();
-                if (serverConnection.isPresent()) {
-                    String serverName = serverConnection.get().getServerInfo().getName();
-                    player.getTabList().addEntry(TabListEntry.builder()
-                            .displayName(Component.text("[" + serverName + "] " + others.getUsername()))
-                            .latency((int) others.getPing())
-                            .profile(others.getGameProfile())
-                            .gameMode(3)
-                            .tabList(player.getTabList())
-                            .build());
-                }
+                serverConnection.ifPresent(connection -> player.getTabList().addEntry(TabListEntry.builder()
+                        .displayName(Component.text("[" + Utils.getServerName(connection.getServerInfo().getName()) + "] " + others.getUsername()))
+                        .latency((int) others.getPing())
+                        .profile(others.getGameProfile())
+                        .gameMode(3)
+                        .tabList(player.getTabList())
+                        .build()));
             }
         }
     }
