@@ -40,11 +40,11 @@ import org.slf4j.Logger;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
-public class TabList {
+public class TabListModule {
 
     private final ProxyServer proxyServer;
 
-    public TabList(ProxyServer proxyServer, ManagementPlugin plugin, Logger logger) {
+    public TabListModule(ProxyServer proxyServer, ManagementPlugin plugin, Logger logger) {
         this.proxyServer = proxyServer;
         this.proxyServer.getScheduler().buildTask(plugin, this::update)
                 .repeat(50L, TimeUnit.MILLISECONDS).schedule();

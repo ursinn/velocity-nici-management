@@ -30,11 +30,11 @@ import com.velocitypowered.api.proxy.ProxyServer;
 import com.velocitypowered.api.proxy.server.ServerPing;
 import org.slf4j.Logger;
 
-public class PingList {
+public class PingListModule {
 
     private final ProxyServer proxyServer;
 
-    public PingList(ProxyServer proxyServer, Logger logger) {
+    public PingListModule(ProxyServer proxyServer, Logger logger) {
         this.proxyServer = proxyServer;
         logger.info("Loaded PingList Module.");
     }

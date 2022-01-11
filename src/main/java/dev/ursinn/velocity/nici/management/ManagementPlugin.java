@@ -29,9 +29,9 @@ import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.proxy.ProxyServer;
-import dev.ursinn.velocity.nici.management.modules.Message;
-import dev.ursinn.velocity.nici.management.modules.PingList;
-import dev.ursinn.velocity.nici.management.modules.TabList;
+import dev.ursinn.velocity.nici.management.modules.MessageModule;
+import dev.ursinn.velocity.nici.management.modules.PingListModule;
+import dev.ursinn.velocity.nici.management.modules.TabListModule;
 import org.slf4j.Logger;
 
 @Plugin(
@@ -55,8 +55,8 @@ public class ManagementPlugin {
 
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event) {
-        this.proxyServer.getEventManager().register(this, new TabList(this.proxyServer, this, this.logger));
-        this.proxyServer.getEventManager().register(this, new Message(this.proxyServer, this.logger));
-        this.proxyServer.getEventManager().register(this, new PingList(this.proxyServer, this.logger));
+        this.proxyServer.getEventManager().register(this, new TabListModule(this.proxyServer, this, this.logger));
+        this.proxyServer.getEventManager().register(this, new MessageModule(this.proxyServer, this.logger));
+        this.proxyServer.getEventManager().register(this, new PingListModule(this.proxyServer, this.logger));
     }
 }

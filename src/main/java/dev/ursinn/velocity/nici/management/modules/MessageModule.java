@@ -42,12 +42,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public class Message {
+public class MessageModule {
 
     private final ProxyServer proxyServer;
     private final List<String> wordList;
 
-    public Message(ProxyServer proxyServer, Logger logger) {
+    public MessageModule(ProxyServer proxyServer, Logger logger) {
         this.proxyServer = proxyServer;
         this.wordList = new ArrayList<>();
 
