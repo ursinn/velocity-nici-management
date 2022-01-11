@@ -93,15 +93,21 @@ public class TabListModule {
         Player player = event.getPlayer();
         player.getTabList().clearHeaderAndFooter();
         Component header = Component.text()
-                .content(" You are playing on ").color(NamedTextColor.AQUA)
-                .append(Component.text("MC.NIKELS.CH ").color(NamedTextColor.YELLOW))
+                .content("")
+                .append(Component.space())
+                .append(Component.text("You are playing on").color(NamedTextColor.AQUA))
+                .append(Component.space())
+                .append(Component.text("MC.NIKELS.CH").color(NamedTextColor.YELLOW))
+                .append(Component.space())
                 .append(Component.newline())
                 .append(Component.text("discord.gg/catland").color(NamedTextColor.GOLD))
                 .build();
         Component footer = Component.text()
-                .content("You are on the ").color(NamedTextColor.AQUA)
+                .content("You are on the").color(NamedTextColor.AQUA)
+                .append(Component.space())
                 .append(Utils.getServerName(player.getCurrentServer()).color(NamedTextColor.YELLOW))
-                .append(Component.text(" Map").color(NamedTextColor.AQUA)).build();
+                .append(Component.space())
+                .append(Component.text("Map").color(NamedTextColor.AQUA)).build();
         player.sendPlayerListHeaderAndFooter(header, footer);
     }
 
