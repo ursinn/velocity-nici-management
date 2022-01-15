@@ -127,6 +127,8 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 
 ### JetBrains extension template
+.idea/.name
+
 # Sonarlint plugin
 .idea/sonarlint
 
