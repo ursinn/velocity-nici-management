@@ -1,4 +1,4 @@
-# velocity-nici-management
+# VelocityNiciManagement
 
 <!--
 [![Jenkins](https://img.shields.io/jenkins/build?jobUrl=https%3A%2F%2Fci.ursinn.dev%2Fjob%2Fursinn%2Fjob%2Fvelocity-nici-management&logo=jenkins&style=for-the-badge)](https://ci.ursinn.dev/job/ursinn/job/velocity-nici-management)
@@ -7,13 +7,8 @@
 [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/ursinn/velocity-nici-management?logo=codeclimate&style=for-the-badge)](https://codeclimate.com/github/ursinn/velocity-nici-management)
 [![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/ursinn/velocity-nici-management?logo=snyk&style=for-the-badge)](https://snyk.io/test/github/ursinn/velocity-nici-management)
 [![License](https://img.shields.io/github/license/ursinn/velocity-nici-management?style=for-the-badge)](https://github.com/ursinn/velocity-nici-management/blob/main/LICENSE)
----
-
-## Description
 
 Management Plugin for [Velocity](https://github.com/PaperMC/Velocity)
-
----
 
 ## License
 
