@@ -60,7 +60,7 @@ public class MessageModule {
         // Word Filter
         for (String word : Utils.getBadWordsList()) {
             if (message.toLowerCase().contains(word.toLowerCase())) {
-                message = message.replaceAll("(?i)" + word, "*".repeat(word.length()));
+                message = message.replaceAll("\\b(?i)" + word + "\\b" + word, "*".repeat(word.length()));
             }
         }
 
