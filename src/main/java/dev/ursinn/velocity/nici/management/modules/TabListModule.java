@@ -100,7 +100,7 @@ public class TabListModule {
                 .append(Component.text("MC.NIKELS.CH").color(NamedTextColor.YELLOW))
                 .append(Component.space())
                 .append(Component.newline())
-                .append(Component.text("discord.gg/catland").color(NamedTextColor.GOLD))
+                .append(Component.text("discord.gg/schweiz").color(NamedTextColor.GOLD))
                 .build();
         Component footer = Component.text()
                 .content("You are on the").color(NamedTextColor.AQUA)
